@@ -1,0 +1,12 @@
+{
+  "name": "Holy Bible \u2014 Instant Edition",
+  "short_name": "Holy Bible",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f0e7",
+  "theme_color": "#315f43",
+  "description": "Offline Bible reader with search, notes, saved verses and read aloud.",
+  "orientation": "any"
+}
