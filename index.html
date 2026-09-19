@@ -225,5 +225,12 @@ document.getElementById('offlineBtn').onclick=async()=>{const btn=document.getEl
   else setTimeout(warmWholeBible,250);
 })();
 </script>
+  <script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('./sw.js');
+  });
+}
+</script>
 </body>
 </html>
