@@ -232,5 +232,59 @@ if ('serviceWorker' in navigator) {
   });
 }
 </script>
+<button id="readBibleButton" onclick="toggleReadBible()" style="
+position:fixed;
+right:18px;
+bottom:80px;
+z-index:9999;
+padding:14px 18px;
+border:0;
+border-radius:999px;
+font-size:16px;
+font-weight:bold;
+box-shadow:0 4px 14px rgba(0,0,0,.25);
+">
+🔊 Read aloud
+</button>
+
+<script>
+let bibleSpeaking = false;
+
+function toggleReadBible() {
+  if (!('speechSynthesis' in window)) {
+    alert('Read aloud is not supported on this device.');
+    return;
+  }
+
+  if (bibleSpeaking) {
+    speechSynthesis.cancel();
+    bibleSpeaking = false;
+    document.getElementById('readBibleButton').textContent = '🔊 Read aloud';
+    return;
+  }
+
+  const verses = [...document.querySelectorAll('.verse')]
+    .map(v => v.innerText.replace('★', '').trim())
+    .join('. ');
+
+  if (!verses) {
+    alert('Open a Bible chapter first.');
+    return;
+  }
+
+  const speech = new SpeechSynthesisUtterance(verses);
+  speech.rate = 0.85;
+  speech.pitch = 1;
+
+  speech.onend = () => {
+    bibleSpeaking = false;
+    document.getElementById('readBibleButton').textContent = '🔊 Read aloud';
+  };
+
+  bibleSpeaking = true;
+  document.getElementById('readBibleButton').textContent = '⏹ Stop reading';
+  speechSynthesis.speak(speech);
+}
+</script>
 </body>
 </html>
